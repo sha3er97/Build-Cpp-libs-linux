@@ -1,7 +1,7 @@
 ﻿
-#   :pushpin:  Building ZMQ C++ for linux!
+#   :pushpin:   Building ZMQ C++ for linux!
 
-###   :books: Used resources :
+###   :books:  Used resources :
 * this nice [Chinese website](https://www.youtube.com/watch?v=DRH-EaIhOlc&list=PLS1lqxOwNjOaEFHEhbU_5uUZwrUquKTwZ) *(translate it to english for better undrstanding of code snippets)*    :cn:
 * Readme of **Zmqpp** repo on [Github](https://github.com/zeromq/zmqpp) 
 * code samples from [Zeromq Documentation](http://zguide.zeromq.org/page:chapter1)
@@ -29,7 +29,7 @@ sudo make install
 sudo ldconfig
 cd ../
 ```
-:arrow_forward: what really worked :+1:
+:arrow_forward:  what really worked :+1:
 ```bash
 sudo apt-get update
 sudo apt-get install libsodium-dev
@@ -40,18 +40,18 @@ sudo apt-get install libsodium-dev
 cd libzmq
 sudo apt-get install autoconf autogen 
 ```
-:arrow_forward: `the previous line solved some errors`   :heavy_check_mark:
+:arrow_forward:  `the previous line solved some errors`   :heavy_check_mark:
 ```bash
 ./autogen.sh 
 ./configure --with-libsodium && make 
 ```
-:arrow_forward: read   :one: for possible error   
+:arrow_forward:  read    :one:  for possible error   
 ```bash
 sudo make install
 sudo ldconfig
 cd ../
 ```
-:one: an error here might arise : 
+:one:  an error here might arise : 
 >checking for working volatile... yes
 checking for sodium... no
 ./configure: line 421: test: then: integer expression expected
