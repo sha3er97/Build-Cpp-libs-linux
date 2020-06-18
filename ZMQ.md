@@ -45,13 +45,24 @@ sudo apt-get install autoconf autogen
 ./autogen.sh 
 ./configure --with-libsodium && make 
 ```
-:arrow_forward:  read    :one:  for possible error   
+:arrow_forward:  read :one:, :two: and :three: for possible errors   
 ```bash
 sudo make install
 sudo ldconfig
 cd ../
 ```
-:one:  an error here might arise : 
+:one:  possible error after running autogen.sh: 
+>autogen.sh: error: could not find libtool.  libtool is required to run autogen.sh
+
+#### `Cause:`
+autogen.h has a check for lib-tool binary.
+
+#### `Solution:`
+install lib tool binary.
+```bash 
+sudo apt-get install libtool-bin
+```
+:two:  an error here might arise after running configure.sh: 
 >checking for working volatile... yes
 checking for sodium... no
 ./configure: line 421: test: then: integer expression expected
@@ -60,10 +71,10 @@ configure: error: run
 ./configure: line 320: exit: then: numeric argument required
 
 #### `Cause:`
-address of the libsodium dynamic library cannot be viewed during the call
+address of the libsodium dynamic library cannot be viewed during the call.
 
 #### `Solution:`
-change in configurations file 
+change in configurations file.
 ```bash 
 echo "/usr/local/lib">>/etc/ld.so.conf
 ```
@@ -74,6 +85,19 @@ cat /etc/ld.so.conf
 output should be like : 
 >**include ld.so.conf.d/*.conf**
 **/usr/local/lib**
+
+:three:  another possible error after running configure.sh : 
+>configure.ac:28: error: possibly undefined macro: AC_SUBSTIf this token and others are legitimate, please use m4_pattern_allow.See the Autoconf documentation.configure.ac:72: error: missing some pkg-config macros (pkg-config package)
+
+#### `Cause:`
+pkg-config package is missing.
+
+#### `Solution:`
+installing the package using the following commands.
+```bash 
+sudo apt-get update -y
+sudo apt-get install -y pkg-config
+```
 ---
 **4.** Build **zmqpp**
 ```bash
