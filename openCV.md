@@ -12,20 +12,29 @@
 **2**. unzip downloaded library and open terminal on it.
 
 ---
-**3**.  then make sure you have some prequisites  :
+`or from terminal : `
 ```bash
-sudo apt-get install libopencv-dev libgtk-3-dev libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev 
+cd ~
+wget -O opencv.zip https://github.com/Itseez/opencv/archive/4.3.0.zip
+unzip opencv.zip
+cd opencv-4.3.0
 ```
->
---> **libopencv-dev** is the most important one of them here
-```bash
-sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-dev 
+---
+**3**.  then make sure you have some prequisites  :
 
+`basic development environment:`
+```bash
+sudo apt-get install build-essential cmake pkg-config unzip
+```
+`opencv dependencies:`
+```bash
+sudo apt-get install libopencv-dev libgtk-3-dev libdc1394-22 libdc1394-22-dev libjpeg-dev  
+```
+```bash
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libxine2-dev
 sudo apt-get install libv4l-dev libtbb-dev libfaac-dev libmp3lame-dev libtheora-dev 
 
 sudo apt-get install libvorbis-dev libxvidcore-dev v4l-utils libopencore-amrnb-dev libopencore-amrwb-dev
-
-sudo apt-get install libjasper-dev libgstreamer-plugins-base0.10-dev
 
 sudo apt-get install libjpeg8-dev libx264-dev libatlas-base-dev gfortran
 ```
@@ -34,10 +43,26 @@ sudo apt-get install libjpeg8-dev libx264-dev libatlas-base-dev gfortran
 ```bash
 mkdir build
 cd build
-cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_V4L=ON . .
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D WITH_V4L=ON ..
+```
+:arrow_forward:  read :one: for possible errors  
+```bash
 make
 sudo make install
 ```
+:one: possible error in making after wrong previous make
+>"FATAL: In-source builds are not allowed.
+You should create separate directory for build files."
+
+#### `Solution:`
+```bash
+rm ../CMakeCache.txt
+(cmake again)
+```
+:arrow_forward: **make sure that you solved the problem before removing CMake cache**
+
 ---
 **5**. finally you need to edit some configuration files..
 1.  Create *opencv.conf* from terminal :
@@ -56,8 +81,10 @@ sudo ldconfig
 sudo nano /etc/bash.bashrc
 ```
 5. At the end of the file .. just append these magic lines :
->**PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
-export PKG_CONFIG_PATH**
+>PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+
+>export PKG_CONFIG_PATH
+
 ---
 **6**. now try to compile a file using open cv with this line :
 ```bash
