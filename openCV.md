@@ -9,11 +9,13 @@
 **1**.  first download **openCV** library form their website :
 [opencv.org](https://opencv.org/opencv-4-3-0/)
  you can also use this direct [download link](https://github.com/opencv/opencv/archive/4.3.0.zip) from **Github**
- 
+ ```bash
+git clone https://github.com/opencv/opencv.git
+```
 **2**. unzip downloaded library and open terminal on it.
 
 ---
-`or from terminal : `
+`another way from terminal : `
 ```bash
 cd ~
 wget -O opencv.zip https://github.com/Itseez/opencv/archive/4.3.0.zip
@@ -137,7 +139,16 @@ output :
 ---
 **9**. now try to compile a file using open cv with this line :
 ```bash
-g++ file.cpp -o out `pkg-config opencv --cflags --libs`
+g++ csrt.cpp -o tracker `pkg-config --cflags --libs opencv4`
 ```
-`pkg-config opencv --cflags --libs` part is very important for the code to run don't remove it and it is essential to write it between two back ticks (\`)  
+`pkg-config --cflags --libs opencv4` part is very important for the code to run don't remove it and it is essential to write it between two back ticks (\`)  
 -> *you will find it above tab button and it is not a single quotation*
+
+and watch out that it is `opencv4` not `opencv` to avoid errors like this :
+> Package opencv was not found in the pkg-config search path.
+Perhaps you should add the directory containing `opencv.pc'
+to the PKG_CONFIG_PATH environment variable
+No package 'opencv' found
+
+or this :
+>fatal error: opencv2/core/utility.hpp: No such file or directory
